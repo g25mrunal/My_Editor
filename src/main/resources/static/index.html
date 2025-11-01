@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Live Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* CSS is exactly the same as before */
+        html, body {
+            height: 100%; margin: 0; font-family: 'Roboto', 'Arial', sans-serif; overflow: hidden;
+        }
+        .app-container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 220px; background-color: #f7f9fa; border-right: 1px solid #d1d5db;
+            padding: 15px; box-sizing: border-box; flex-shrink: 0;
+        }
+        .sidebar h3 { font-weight: 500; color: #333; margin-top: 0; }
+        .file-list { list-style: none; padding: 0; }
+        .file-list li {
+            padding: 8px 12px; cursor: pointer; border-radius: 5px; color: #444;
+        }
+        .file-list li:hover { background-color: #e9ecef; }
+        .file-list li.active {
+            background-color: #007bff; color: white; font-weight: 500;
+        }
+        .main-content {
+            flex-grow: 1; display: flex; flex-direction: column; background-color: #ffffff;
+        }
+        .header {
+            padding: 10px 20px; background: #fff; border-bottom: 1px solid #d1d5db;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02); display: flex;
+            justify-content: space-between; align-items: center; flex-shrink: 0;
+        }
+        .header-filename { font-size: 1.1em; font-weight: 500; color: #222; }
+        #status {
+            display: flex; align-items: center; font-size: 0.9em; color: #666;
+        }
+        #status-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background-color: #ff5555; margin-right: 8px; transition: background-color 0.3s ease;
+        }
+        .editor-wrapper { flex-grow: 1; position: relative; }
+        .CodeMirror {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <h3>Files</h3>
+            <ul class="file-list">
+                <li class="file-item active" data-file-id="script-js" data-file-name="script.js" data-mode="javascript">📄 script.js</li>
+                <li class="file-item" data-file-id="index-html" data-file-name="index.html" data-mode="xml">📄 index.html</li>
+                <li class="file-item" data-file-id="style-css" data-file-name="style.css" data-mode="css">📄 style.css</li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <div class="header-filename" id="current-filename">script.js</div>
+                <div id="status">
+                    <span id="status-dot"></span>
+                    <span id="status-text">Connecting...</span>
+                </div>
+            </div>
+            
+            <div class="editor-wrapper" id="editor-container"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    //.\mvnw spring-boot:run
+    <script src="/app.js"></script>
+</body>
+</html>
